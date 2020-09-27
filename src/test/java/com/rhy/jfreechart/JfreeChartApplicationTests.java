@@ -147,7 +147,7 @@ class JfreeChartApplicationTests {
         //图片的高度
         int height = 480; /* Height of the image */
         //保存的图片位置
-        File XYChart = new File( "D:\\ideaProject\\jfree-chart\\img\\XYLineChart.jpeg" );
+        File XYChart = new File( System.getProperty("user.dir")+"\\img\\XYLineChart.jpeg" );
         //就是一个工具类  固定用法  将图片保存到本地
         ChartUtilities.saveChartAsJPEG( XYChart, xylineChart, width, height);
     }//原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/jfreechart/jfreechart_xy_chart.html
