@@ -3,6 +3,7 @@ package com.rhy.jfreechart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
@@ -117,9 +118,9 @@ class JfreeChartApplicationTests {
         //添加第一个点 x轴位置，y轴位置
         firefox.add( 1.0 , 1.0 );
         //添加第二个点 x轴位置，y轴位置
-        firefox.add( 2.0 , 4.0 );
+        firefox.add( 10.0 , 10.0 );
         //添加第三个点 x轴位置，y轴位置
-        firefox.add( 3.0 , 3.0 );
+        firefox.add( 13.0 , 13.0 );
 //        XYSeries chrome = new XYSeries( "Chrome" );
 //        chrome.add( 1.0 , 4.0 );
 //        chrome.add( 2.0 , 5.0 );
@@ -142,6 +143,10 @@ class JfreeChartApplicationTests {
                 dataset,
                 PlotOrientation.VERTICAL,
                 true, true, false);
+        //创建一个文本注释
+        XYTextAnnotation anno = new XYTextAnnotation("我的大宝贝", 10, 9);
+        //画在图上
+        xylineChart.getXYPlot().addAnnotation(anno);
         //图片的宽度
         int width = 640; /* Width of the image */
         //图片的高度
@@ -152,5 +157,67 @@ class JfreeChartApplicationTests {
         ChartUtilities.saveChartAsJPEG( XYChart, xylineChart, width, height);
     }//原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/jfreechart/jfreechart_xy_chart.html
 
+    @Test
+    public void test2() throws IOException {
+        //画X轴线
+        XYSeriesCollection dataset = drawingXLine();
 
+        JFreeChart xylineChart = ChartFactory.createXYLineChart(
+                "",
+                "",
+                "",
+                dataset,
+                PlotOrientation.VERTICAL,
+                false, false, false);
+        //设置画板 以这个为框体开始画
+        setDrawingBoard(xylineChart);
+
+
+
+        //保存的图片位置
+        File XYChart = new File( System.getProperty("user.dir")+"\\img\\self.jpeg" );
+        //就是一个工具类  固定用法  将图片保存到本地
+        //图片的宽度
+        int width = 960; /* Width of the image */
+        //图片的高度
+        int height = 1280; /* Height of the image */
+        ChartUtilities.saveChartAsJPEG( XYChart, xylineChart, width, height);
+    }
+
+    /**
+     * 设置画板
+     * @param xylineChart
+     */
+    private void setDrawingBoard(JFreeChart xylineChart){
+        //获得轴对象
+        XYPlot xYPlot = (XYPlot) xylineChart.getPlot();
+        //获得Y轴轴线对象
+        NumberAxis rangeAxis = (NumberAxis) xYPlot.getRangeAxis();
+        //Y轴轴线不自动宽度
+        rangeAxis.setAutoRangeIncludesZero(false);
+        //Y轴轴线是否显示
+        rangeAxis.setAxisLineVisible(false);
+        //Y轴轴线刻度
+        rangeAxis.setRange(0,91);
+        //Y轴轴线刻度间距
+        rangeAxis.setTickUnit(NumberAxis.DEFAULT_TICK_UNIT);
+        //获得X轴轴线对象
+        NumberAxis domainAxis = (NumberAxis) xYPlot.getDomainAxis();
+        //X轴轴线不自动宽度
+        domainAxis.setAutoRangeIncludesZero(false);
+        //X轴轴线是否显示
+        domainAxis.setAxisLineVisible(false);
+        //X轴轴线刻度
+        domainAxis.setRange(0,51);
+        //X轴轴线刻度间距
+        domainAxis.setTickUnit(NumberAxis.DEFAULT_TICK_UNIT);
+    }
+
+    /**
+     * 画X轴线
+     * @param xylineChart
+     */
+    private XYSeriesCollection drawingXLine(){
+        return null;
+    }
 }
