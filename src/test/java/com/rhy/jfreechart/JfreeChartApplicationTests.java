@@ -113,6 +113,7 @@ class JfreeChartApplicationTests {
     @Test
     public void test1()throws Exception
     {
+
         //创建一条线
         XYSeries firefox = new XYSeries( "Firefox" );
         //添加第一个点 x轴位置，y轴位置
