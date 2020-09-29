@@ -11,6 +11,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer3D;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -122,10 +123,13 @@ class JfreeChartApplicationTests {
         firefox.add( 10.0 , 10.0 );
         //添加第三个点 x轴位置，y轴位置
         firefox.add( 13.0 , 13.0 );
-//        XYSeries chrome = new XYSeries( "Chrome" );
-//        chrome.add( 1.0 , 4.0 );
-//        chrome.add( 2.0 , 5.0 );
-//        chrome.add( 3.0 , 6.0 );
+        XYSeries chrome = new XYSeries( "Chrome" );
+        //添加第一个点 x轴位置，y轴位置
+        chrome.add( 1.0 , 1.0 );
+        //添加第三个点 x轴位置，y轴位置
+        chrome.add( 13.0 , 13.0 );
+        //添加第二个点 x轴位置，y轴位置
+        chrome.add( 10.0 , 10.0 );
 //        XYSeries iexplorer = new XYSeries( "InternetExplorer" );
 //        iexplorer.add( 3.0 , 4.0 );
 //        iexplorer.add( 4.0 , 5.0 );
@@ -134,7 +138,7 @@ class JfreeChartApplicationTests {
         XYSeriesCollection dataset = new XYSeriesCollection();
         //把刚才那条折线放入List集合中
         dataset.addSeries( firefox );
-//        dataset.addSeries( chrome );
+        dataset.addSeries( chrome );
 //        dataset.addSeries( iexplorer );
         //固定方法，ChartFactory利用这个类构建一个折线图
         JFreeChart xylineChart = ChartFactory.createXYLineChart(
@@ -148,6 +152,9 @@ class JfreeChartApplicationTests {
         XYTextAnnotation anno = new XYTextAnnotation("我的大宝贝", 10, 9);
         //画在图上
         xylineChart.getXYPlot().addAnnotation(anno);
+        XYLineAndShapeRenderer xylinerenderer= (XYLineAndShapeRenderer) xylineChart.getXYPlot().getRenderer();
+        xylinerenderer.setSeriesPaint(0,Color.YELLOW);
+        xylinerenderer.setSeriesPaint(1,Color.BLACK);
         //图片的宽度
         int width = 640; /* Width of the image */
         //图片的高度
@@ -216,7 +223,6 @@ class JfreeChartApplicationTests {
 
     /**
      * 画X轴线
-     * @param xylineChart
      */
     private XYSeriesCollection drawingXLine(){
         return null;
