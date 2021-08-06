@@ -1,5 +1,6 @@
 package com.rhy.jfreechart;
 
+import com.rhy.jfreechart.service.TwdService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -11,13 +12,10 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer3D;
-import org.jfree.chart.renderer.category.LineAndShapeRenderer;
-import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
@@ -171,39 +169,7 @@ class JfreeChartApplicationTests {
 
     @Test
     public void test2() throws IOException {
-        //这个就可以理解为线的List集合
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        //画X轴线
-        drawingXLine(dataset);
-        //画Y轴线
-        drawingYLine(dataset);
-        JFreeChart xylineChart = ChartFactory.createXYLineChart(
-                "",
-                "",
-                "",
-                dataset,
-                PlotOrientation.VERTICAL,
-                false, false, false);
-        //获得轴对象
-        XYPlot xYPlot = (XYPlot) xylineChart.getPlot();
-        xYPlot.setDataset(0, dataset);
-
-        //线条涂色
-        paintingLine(xYPlot);
-
-//        xYPlot.getRenderer().setSeriesPaint(0, new Color(0, 0, 0));
-        //设置画板 以这个为框体开始画
-        setDrawingBoard(xylineChart);
-
-
-        //保存的图片位置
-        File XYChart = new File(System.getProperty("user.dir") + "\\img\\self.jpeg");
-        //就是一个工具类  固定用法  将图片保存到本地
-        //图片的宽度
-        int width = 960; /* Width of the image */
-        //图片的高度
-        int height = 1280; /* Height of the image */
-        ChartUtilities.saveChartAsJPEG(XYChart, xylineChart, width, height);
+        new TwdService().run();
     }
 
     /**
@@ -214,7 +180,7 @@ class JfreeChartApplicationTests {
         //获得渲染器这个意思
         XYLineAndShapeRenderer xyLineAndShapeRenderer = (XYLineAndShapeRenderer) xYPlot.getRenderer();
         for(int i=0;i<119;i++){
-            xyLineAndShapeRenderer.setSeriesPaint(i,Color.BLACK);
+            xyLineAndShapeRenderer.setSeriesPaint(i,Color.WHITE);
         }
 
     }
